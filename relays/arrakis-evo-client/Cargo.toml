@@ -14,6 +14,7 @@ relay-utils = { path = "../utils" }
 
 bp-millau = { path = "../../primitives/chain-millau" }
 millau-runtime = { path = "../../bin/millau/runtime" }
+node-template-runtime = { git = "https://github.com/freeverseio/laos-evolution-node", tag = "v0.0.9" } 
 
 # Substrate Dependencies
 
