@@ -14,15 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with Parity Bridges Common.  If not, see <http://www.gnu.org/licenses/>.
 
-use bridge_runtime_common::messages_xcm_extension::XcmBlobHauler;
 use millau_runtime::{
-	AccountId, AuraConfig, BalancesConfig, BeefyConfig, BridgeRialtoMessagesConfig,
-	BridgeRialtoParachainMessagesConfig, BridgeWestendGrandpaConfig, GrandpaConfig,
-	RuntimeGenesisConfig, SessionConfig, SessionKeys, Signature, SudoConfig, SystemConfig,
-	WASM_BINARY,
+	AccountId, AuraConfig, BalancesConfig, GrandpaConfig, RuntimeGenesisConfig, Signature,
+	SudoConfig, SystemConfig, WASM_BINARY,
 };
 use sp_consensus_aura::sr25519::AuthorityId as AuraId;
-use sp_consensus_beefy::crypto::AuthorityId as BeefyId;
 use sp_consensus_grandpa::AuthorityId as GrandpaId;
 use sp_core::{sr25519, Pair, Public};
 use sp_runtime::traits::{IdentifyAccount, Verify};
@@ -74,13 +70,8 @@ where
 }
 
 /// Helper function to generate an authority key for Aura
-pub fn get_authority_keys_from_seed(s: &str) -> (AccountId, AuraId, BeefyId, GrandpaId) {
-	(
-		get_account_id_from_seed::<sr25519::Public>(s),
-		get_from_seed::<AuraId>(s),
-		get_from_seed::<BeefyId>(s),
-		get_from_seed::<GrandpaId>(s),
-	)
+pub fn get_authority_keys_from_seed(s: &str) -> (AuraId, GrandpaId) {
+	(get_from_seed::<AuraId>(s), get_from_seed::<GrandpaId>(s))
 }
 
 impl Alternative {
@@ -186,12 +177,12 @@ fn endowed_accounts() -> Vec<AccountId> {
 	.collect()
 }
 
-fn session_keys(aura: AuraId, beefy: BeefyId, grandpa: GrandpaId) -> SessionKeys {
-	SessionKeys { aura, beefy, grandpa }
-}
+// fn session_keys(aura: AuraId, grandpa: GrandpaId) -> SessionKeys {
+// 	SessionKeys { aura, grandpa }
+// }
 
 fn testnet_genesis(
-	initial_authorities: Vec<(AccountId, AuraId, BeefyId, GrandpaId)>,
+	initial_authorities: Vec<(AuraId, GrandpaId)>,
 	root_key: AccountId,
 	endowed_accounts: Vec<AccountId>,
 	_enable_println: bool,
@@ -204,40 +195,13 @@ fn testnet_genesis(
 		balances: BalancesConfig {
 			balances: endowed_accounts.iter().cloned().map(|k| (k, 1 << 50)).collect(),
 		},
-		aura: AuraConfig { authorities: Vec::new() },
-		beefy: BeefyConfig::default(),
-		grandpa: GrandpaConfig { authorities: Vec::new(), ..Default::default() },
+		aura: AuraConfig {
+			authorities: initial_authorities.iter().map(|x| (x.0.clone())).collect(),
+		},
+		grandpa: GrandpaConfig {
+			authorities: initial_authorities.iter().map(|x| (x.1.clone(), 1)).collect(),
+			..Default::default()
+		},
 		sudo: SudoConfig { key: Some(root_key) },
-		session: SessionConfig {
-			keys: initial_authorities
-				.iter()
-				.map(|x| {
-					(x.0.clone(), x.0.clone(), session_keys(x.1.clone(), x.2.clone(), x.3.clone()))
-				})
-				.collect::<Vec<_>>(),
-		},
-		bridge_westend_grandpa: BridgeWestendGrandpaConfig {
-			// for our deployments to avoid multiple same-nonces transactions:
-			// //Alice is already used to initialize Rialto<->Millau bridge
-			// => let's use //Westend.GrandpaOwner to initialize Westend->Millau bridge
-			owner: Some(get_account_id_from_seed::<sr25519::Public>(WESTEND_GRANDPA_PALLET_OWNER)),
-			..Default::default()
-		},
-		bridge_rialto_messages: BridgeRialtoMessagesConfig {
-			owner: Some(get_account_id_from_seed::<sr25519::Public>(RIALTO_MESSAGES_PALLET_OWNER)),
-			opened_lanes: vec![millau_runtime::rialto_messages::ToRialtoXcmBlobHauler::xcm_lane()],
-			..Default::default()
-		},
-		bridge_rialto_parachain_messages: BridgeRialtoParachainMessagesConfig {
-			owner: Some(get_account_id_from_seed::<sr25519::Public>(
-				RIALTO_PARACHAIN_MESSAGES_PALLET_OWNER,
-			)),
-			opened_lanes: vec![
-				millau_runtime::rialto_parachain_messages::ToRialtoParachainXcmBlobHauler::xcm_lane(
-				),
-			],
-			..Default::default()
-		},
-		xcm_pallet: Default::default(),
 	}
 }
