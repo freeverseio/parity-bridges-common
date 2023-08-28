@@ -9,7 +9,7 @@ license = "GPL-3.0-or-later WITH Classpath-exception-2.0"
 [dependencies]
 
 # Core primitives
-evochain-primitives = { git = "https://github.com/freeverseio/laos-evolution-node.git", branch = "feat/grandpa-rpc", default-features = false }
+evochain-primitives = { git = "https://github.com/freeverseio/laos-evolution-node.git", branch = "dev", default-features = false }
 
 # Bridge Dependencies
 

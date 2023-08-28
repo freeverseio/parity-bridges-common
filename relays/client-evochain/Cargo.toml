@@ -12,7 +12,7 @@ relay-utils = { path = "../utils" }
 
 # Supported Chains
 bp-evochain = { path = "../../primitives/chain-evolution" }
-node-template-runtime = { git = "https://github.com/freeverseio/laos-evolution-node.git", branch = "feat/grandpa-rpc" }
+node-template-runtime = { git = "https://github.com/freeverseio/laos-evolution-node.git", branch = "dev" }
 
 # Substrate Dependencies
 frame-support = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v1.0.0" }

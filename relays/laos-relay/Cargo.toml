@@ -23,7 +23,7 @@ signal-hook-async-std = "0.2.2"
 strum = { version = "0.25.0", features = ["derive"] }
 
 # Bridge dependencies
-evochain-primitives = { git = "https://github.com/freeverseio/laos-evolution-node", branch = "feat/grandpa-rpc" }
+evochain-primitives = { git = "https://github.com/freeverseio/laos-evolution-node", branch = "dev" }
 bp-header-chain = { path = "../../primitives/header-chain" }
 bp-messages = { path = "../../primitives/messages" }
 bp-parachains = { path = "../../primitives/parachains" }
@@ -39,7 +39,7 @@ relay-utils = { path = "../utils" }
 # to prepare large XCM messages
 substrate-relay-helper = { path = "../lib-substrate-relay" }
 
-node-template-runtime = { git = "https://github.com/freeverseio/laos-evolution-node", branch = "feat/grandpa-rpc" }
+node-template-runtime = { git = "https://github.com/freeverseio/laos-evolution-node", branch = "dev" }
 laos-runtime = { git = "https://github.com/freeverseio/laos-ownership-node", branch = "feat/relayer" }
 
 # Substrate Dependencies
