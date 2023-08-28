@@ -104,7 +104,7 @@ impl<BlobDispatcher: DispatchBlob, Weights: MessagesPalletWeights> MessageDispat
 				return MessageDispatchResult {
 					unspent_weight: Weight::zero(),
 					dispatch_level_result: XcmBlobMessageDispatchResult::InvalidPayload,
-				}
+				};
 			},
 		};
 		let dispatch_level_result = match BlobDispatcher::dispatch_blob(payload) {

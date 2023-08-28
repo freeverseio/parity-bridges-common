@@ -236,7 +236,7 @@ impl<P: EquivocationDetectionPipeline, SC: SourceClient<P>, TC: TargetClient<P>>
 						for source header {:?} synced at target block {block_num:?}: {e:?}",
 						synced_header.finality_proof.target_header_hash()
 					);
-					continue
+					continue;
 				},
 			};
 			for equivocation in equivocations {

@@ -115,18 +115,24 @@ impl RelayMessages {
 		match self.bridge {
 			FullBridge::MillauToRialto => MillauToRialtoCliBridge::relay_messages(self),
 			FullBridge::RialtoToMillau => RialtoToMillauCliBridge::relay_messages(self),
-			FullBridge::MillauToRialtoParachain =>
-				MillauToRialtoParachainCliBridge::relay_messages(self),
-			FullBridge::RialtoParachainToMillau =>
-				RialtoParachainToMillauCliBridge::relay_messages(self),
-			FullBridge::BridgeHubRococoToBridgeHubWococo =>
-				BridgeHubRococoToBridgeHubWococoMessagesCliBridge::relay_messages(self),
-			FullBridge::BridgeHubWococoToBridgeHubRococo =>
-				BridgeHubWococoToBridgeHubRococoMessagesCliBridge::relay_messages(self),
-			FullBridge::BridgeHubKusamaToBridgeHubPolkadot =>
-				BridgeHubKusamaToBridgeHubPolkadotMessagesCliBridge::relay_messages(self),
-			FullBridge::BridgeHubPolkadotToBridgeHubKusama =>
-				BridgeHubPolkadotToBridgeHubKusamaMessagesCliBridge::relay_messages(self),
+			FullBridge::MillauToRialtoParachain => {
+				MillauToRialtoParachainCliBridge::relay_messages(self)
+			},
+			FullBridge::RialtoParachainToMillau => {
+				RialtoParachainToMillauCliBridge::relay_messages(self)
+			},
+			FullBridge::BridgeHubRococoToBridgeHubWococo => {
+				BridgeHubRococoToBridgeHubWococoMessagesCliBridge::relay_messages(self)
+			},
+			FullBridge::BridgeHubWococoToBridgeHubRococo => {
+				BridgeHubWococoToBridgeHubRococoMessagesCliBridge::relay_messages(self)
+			},
+			FullBridge::BridgeHubKusamaToBridgeHubPolkadot => {
+				BridgeHubKusamaToBridgeHubPolkadotMessagesCliBridge::relay_messages(self)
+			},
+			FullBridge::BridgeHubPolkadotToBridgeHubKusama => {
+				BridgeHubPolkadotToBridgeHubKusamaMessagesCliBridge::relay_messages(self)
+			},
 		}
 		.await
 	}

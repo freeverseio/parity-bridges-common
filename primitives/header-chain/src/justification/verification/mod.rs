@@ -71,14 +71,14 @@ impl<Header: HeaderT> AncestryChain<Header> {
 		precommit_target_number: &Header::Number,
 	) -> Option<Vec<Header::Hash>> {
 		if precommit_target_number < &self.base.number() {
-			return None
+			return None;
 		}
 
 		let mut route = vec![];
 		let mut current_hash = *precommit_target_hash;
 		loop {
 			if current_hash == self.base.hash() {
-				break
+				break;
 			}
 
 			current_hash = match self.parents.get(&current_hash) {
@@ -87,7 +87,7 @@ impl<Header: HeaderT> AncestryChain<Header> {
 					if is_visited_before {
 						// If the current header has been visited in a previous call, it is a
 						// descendent of `base` (we assume that the previous call was successful).
-						return Some(route)
+						return Some(route);
 					}
 					route.push(current_hash);
 
@@ -209,10 +209,10 @@ trait JustificationVerifier<Header: HeaderT> {
 		justification: &GrandpaJustification<Header>,
 	) -> Result<(), Error> {
 		// ensure that it is justification for the expected header
-		if (justification.commit.target_hash, justification.commit.target_number) !=
-			finalized_target
+		if (justification.commit.target_hash, justification.commit.target_number)
+			!= finalized_target
 		{
-			return Err(Error::InvalidJustificationTarget)
+			return Err(Error::InvalidJustificationTarget);
 		}
 
 		let threshold = context.voter_set.threshold().get();
@@ -225,7 +225,7 @@ trait JustificationVerifier<Header: HeaderT> {
 				let action =
 					self.process_redundant_vote(precommit_idx).map_err(Error::Precommit)?;
 				if matches!(action, IterationFlow::Skip) {
-					continue
+					continue;
 				}
 			}
 
@@ -238,14 +238,14 @@ trait JustificationVerifier<Header: HeaderT> {
 						.process_known_authority_vote(precommit_idx, signed)
 						.map_err(Error::Precommit)?;
 					if matches!(action, IterationFlow::Skip) {
-						continue
+						continue;
 					}
 
 					authority_info
 				},
 				None => {
 					self.process_unknown_authority_vote(precommit_idx).map_err(Error::Precommit)?;
-					continue
+					continue;
 				},
 			};
 
@@ -257,7 +257,7 @@ trait JustificationVerifier<Header: HeaderT> {
 					.process_unrelated_ancestry_vote(precommit_idx)
 					.map_err(Error::Precommit)?;
 				if matches!(action, IterationFlow::Skip) {
-					continue
+					continue;
 				}
 			}
 
@@ -271,7 +271,7 @@ trait JustificationVerifier<Header: HeaderT> {
 				&mut signature_buffer,
 			) {
 				self.process_invalid_signature_vote(precommit_idx).map_err(Error::Precommit)?;
-				continue
+				continue;
 			}
 
 			// now we can count the vote since we know that it is valid
@@ -285,7 +285,7 @@ trait JustificationVerifier<Header: HeaderT> {
 		// check that the cumulative weight of validators that voted for the justification target
 		// (or one of its descendents) is larger than the required threshold.
 		if cumulative_weight < threshold {
-			return Err(Error::TooLowCumulativeWeight)
+			return Err(Error::TooLowCumulativeWeight);
 		}
 
 		// check that there are no extra headers in the justification

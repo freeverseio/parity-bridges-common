@@ -223,7 +223,7 @@ pub mod pallet {
 
 			// registration is inactive if relayer stake is less than required
 			if registration.stake < Self::required_stake() {
-				return false
+				return false;
 			}
 
 			// registration is inactive if it ends soon
@@ -231,7 +231,7 @@ pub mod pallet {
 				.valid_till
 				.saturating_sub(frame_system::Pallet::<T>::block_number());
 			if remaining_lease <= Self::required_registration_lease() {
-				return false
+				return false;
 			}
 
 			true
@@ -253,7 +253,7 @@ pub mod pallet {
 						relayer,
 					);
 
-					return
+					return;
 				},
 			};
 
@@ -308,7 +308,7 @@ pub mod pallet {
 			reward: T::Reward,
 		) {
 			if reward.is_zero() {
-				return
+				return;
 			}
 
 			RelayerRewards::<T>::mutate(

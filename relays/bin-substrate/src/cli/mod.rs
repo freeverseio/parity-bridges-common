@@ -102,10 +102,10 @@ impl Command {
 		use relay_utils::initialize::{initialize_logger, initialize_relay};
 
 		match self {
-			Self::RelayHeaders(_) |
-			Self::RelayMessages(_) |
-			Self::RelayHeadersAndMessages(_) |
-			Self::InitBridge(_) => {
+			Self::RelayHeaders(_)
+			| Self::RelayMessages(_)
+			| Self::RelayHeadersAndMessages(_)
+			| Self::InitBridge(_) => {
 				initialize_relay();
 			},
 			_ => {
@@ -137,7 +137,7 @@ impl Command {
 			Ok(signals) => signals,
 			Err(e) => {
 				log::error!(target: LOG_TARGET, "Could not register exit signals: {}", e);
-				return
+				return;
 			},
 		};
 		let run = self.do_run().fuse();
@@ -320,7 +320,7 @@ where
 
 	fn from_str(s: &str) -> Result<Self, Self::Err> {
 		if s.to_lowercase() == "max" {
-			return Ok(ExplicitOrMaximal::Maximal)
+			return Ok(ExplicitOrMaximal::Maximal);
 		}
 
 		V::from_str(s)

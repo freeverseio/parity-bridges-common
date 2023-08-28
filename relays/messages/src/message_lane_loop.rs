@@ -700,7 +700,7 @@ pub(crate) mod tests {
 			let mut data = self.data.lock();
 			(self.tick)(&mut data);
 			if data.is_source_fails {
-				return Err(TestError)
+				return Err(TestError);
 			}
 			(self.post_tick)(&mut data);
 			Ok(data.source_state.clone())
@@ -713,7 +713,7 @@ pub(crate) mod tests {
 			let mut data = self.data.lock();
 			(self.tick)(&mut data);
 			if data.is_source_fails {
-				return Err(TestError)
+				return Err(TestError);
 			}
 			(self.post_tick)(&mut data);
 			Ok((id, data.source_latest_generated_nonce))
@@ -845,7 +845,7 @@ pub(crate) mod tests {
 			let mut data = self.data.lock();
 			(self.tick)(&mut data);
 			if data.is_target_fails {
-				return Err(TestError)
+				return Err(TestError);
 			}
 			(self.post_tick)(&mut data);
 			Ok(data.target_state.clone())
@@ -858,7 +858,7 @@ pub(crate) mod tests {
 			let mut data = self.data.lock();
 			(self.tick)(&mut data);
 			if data.is_target_fails {
-				return Err(TestError)
+				return Err(TestError);
 			}
 			(self.post_tick)(&mut data);
 			Ok((id, data.target_latest_received_nonce))
@@ -886,7 +886,7 @@ pub(crate) mod tests {
 			let mut data = self.data.lock();
 			(self.tick)(&mut data);
 			if data.is_target_fails {
-				return Err(TestError)
+				return Err(TestError);
 			}
 			(self.post_tick)(&mut data);
 			Ok((id, data.target_latest_confirmed_received_nonce))
@@ -909,7 +909,7 @@ pub(crate) mod tests {
 			let mut data = self.data.lock();
 			(self.tick)(&mut data);
 			if data.is_target_fails {
-				return Err(TestError)
+				return Err(TestError);
 			}
 			data.receive_messages(maybe_batch_tx, proof);
 			(self.post_tick)(&mut data);
@@ -1063,8 +1063,8 @@ pub(crate) mod tests {
 				data.source_state.best_finalized_self = data.source_state.best_self;
 				// syncing target headers -> source chain
 				if let Some(last_requirement) = data.target_to_source_header_requirements.last() {
-					if *last_requirement !=
-						data.source_state.best_finalized_peer_at_best_self.unwrap()
+					if *last_requirement
+						!= data.source_state.best_finalized_peer_at_best_self.unwrap()
 					{
 						data.source_state.best_finalized_peer_at_best_self =
 							Some(*last_requirement);
@@ -1086,8 +1086,8 @@ pub(crate) mod tests {
 				data.target_state.best_finalized_self = data.target_state.best_self;
 				// syncing source headers -> target chain
 				if let Some(last_requirement) = data.source_to_target_header_requirements.last() {
-					if *last_requirement !=
-						data.target_state.best_finalized_peer_at_best_self.unwrap()
+					if *last_requirement
+						!= data.target_state.best_finalized_peer_at_best_self.unwrap()
 					{
 						data.target_state.best_finalized_peer_at_best_self =
 							Some(*last_requirement);
@@ -1143,15 +1143,15 @@ pub(crate) mod tests {
 				// headers relay must only be started when we need new target headers at source node
 				if data.target_to_source_header_required.is_some() {
 					assert!(
-						data.source_state.best_finalized_peer_at_best_self.unwrap().0 <
-							data.target_state.best_self.0
+						data.source_state.best_finalized_peer_at_best_self.unwrap().0
+							< data.target_state.best_self.0
 					);
 					data.target_to_source_header_required = None;
 				}
 				// syncing target headers -> source chain
 				if let Some(last_requirement) = data.target_to_source_header_requirements.last() {
-					if *last_requirement !=
-						data.source_state.best_finalized_peer_at_best_self.unwrap()
+					if *last_requirement
+						!= data.source_state.best_finalized_peer_at_best_self.unwrap()
 					{
 						data.source_state.best_finalized_peer_at_best_self =
 							Some(*last_requirement);
@@ -1167,15 +1167,15 @@ pub(crate) mod tests {
 				// headers relay must only be started when we need new source headers at target node
 				if data.source_to_target_header_required.is_some() {
 					assert!(
-						data.target_state.best_finalized_peer_at_best_self.unwrap().0 <
-							data.source_state.best_self.0
+						data.target_state.best_finalized_peer_at_best_self.unwrap().0
+							< data.source_state.best_self.0
 					);
 					data.source_to_target_header_required = None;
 				}
 				// syncing source headers -> target chain
 				if let Some(last_requirement) = data.source_to_target_header_requirements.last() {
-					if *last_requirement !=
-						data.target_state.best_finalized_peer_at_best_self.unwrap()
+					if *last_requirement
+						!= data.target_state.best_finalized_peer_at_best_self.unwrap()
 					{
 						data.target_state.best_finalized_peer_at_best_self =
 							Some(*last_requirement);

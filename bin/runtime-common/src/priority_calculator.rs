@@ -101,9 +101,9 @@ mod integrity_tests {
 				estimate_message_delivery_transaction_priority::<Runtime, MessagesInstance>(1, tip);
 
 			const ERROR_MARGIN: TransactionPriority = 5; // 5%
-			if priority_with_boost.abs_diff(priority_with_tip).saturating_mul(100) /
-				priority_with_tip >
-				ERROR_MARGIN
+			if priority_with_boost.abs_diff(priority_with_tip).saturating_mul(100)
+				/ priority_with_tip
+				> ERROR_MARGIN
 			{
 				panic!(
 					"The PriorityBoostPerMessage value ({}) must be fixed to: {}",

@@ -43,7 +43,7 @@ fn transform_into_unique(
 fn run_fuzzer() {
 	fuzz!(|input_vec: Vec<(Vec<u8>, Option<Vec<u8>>)>| {
 		if input_vec.is_empty() {
-			return
+			return;
 		}
 		let unique_input_vec = transform_into_unique(input_vec);
 		let (root, storage_proof) = UnverifiedStorageProof::try_from_entries::<Blake2Hasher>(

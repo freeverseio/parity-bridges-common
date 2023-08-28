@@ -110,7 +110,7 @@ where
 		// parachain head - we simply return `Unavailable`
 		let best_block_number = self.client.best_finalized_header_number().await?;
 		if is_ancient_block(at_block.number(), best_block_number) {
-			return Ok(AvailableHeader::Unavailable)
+			return Ok(AvailableHeader::Unavailable);
 		}
 
 		// else - try to read head from the source client

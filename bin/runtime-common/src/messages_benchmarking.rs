@@ -48,7 +48,7 @@ fn prepare_inbound_message(
 
 	// if we don't need a correct message, then we may just return some random blob
 	if !params.is_successful_dispatch_expected {
-		return vec![0u8; expected_size]
+		return vec![0u8; expected_size];
 	}
 
 	// else let's prepare successful message. For XCM bridge hubs, it is the message that

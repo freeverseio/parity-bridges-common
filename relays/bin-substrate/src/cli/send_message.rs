@@ -106,10 +106,12 @@ impl SendMessage {
 		match self.bridge {
 			FullBridge::MillauToRialto => MillauToRialtoCliBridge::send_message(self),
 			FullBridge::RialtoToMillau => RialtoToMillauCliBridge::send_message(self),
-			FullBridge::MillauToRialtoParachain =>
-				MillauToRialtoParachainCliBridge::send_message(self),
-			FullBridge::RialtoParachainToMillau =>
-				RialtoParachainToMillauCliBridge::send_message(self),
+			FullBridge::MillauToRialtoParachain => {
+				MillauToRialtoParachainCliBridge::send_message(self)
+			},
+			FullBridge::RialtoParachainToMillau => {
+				RialtoParachainToMillauCliBridge::send_message(self)
+			},
 			FullBridge::BridgeHubRococoToBridgeHubWococo => unimplemented!(
 				"Sending message from BridgeHubRococo to BridgeHubWococo is not supported"
 			),

@@ -85,7 +85,7 @@ impl ReceiveMessagesProofInfo {
 				// or if we can't accept new messages at all
 				self.unrewarded_relayers.free_message_slots == 0;
 
-			return !empty_transactions_allowed
+			return !empty_transactions_allowed;
 		}
 
 		// otherwise we require bundled messages to continue stored range
@@ -151,8 +151,8 @@ impl<T: Config<I>, I: 'static> CallHelper<T, I> {
 					// `is_obsolete` and every relayer has delivered at least one message,
 					// so if relayer slots are released, then message slots are also
 					// released
-					return post_occupation.free_message_slots >
-						info.unrewarded_relayers.free_message_slots
+					return post_occupation.free_message_slots
+						> info.unrewarded_relayers.free_message_slots;
 				}
 
 				inbound_lane_data.last_delivered_nonce() == *info.base.bundled_range.end()
@@ -216,7 +216,7 @@ impl<
 					best_stored_nonce: inbound_lane_data.last_delivered_nonce(),
 				},
 				unrewarded_relayers: unrewarded_relayers_occupation::<T, I>(&inbound_lane_data),
-			})
+			});
 		}
 
 		None
@@ -238,10 +238,10 @@ impl<
 				// confirmation. Because of that, we can't assume that our state has been confirmed
 				// to the bridged chain. So we are accepting any proof that brings new
 				// confirmations.
-				bundled_range: outbound_lane_data.latest_received_nonce + 1..=
-					relayers_state.last_delivered_nonce,
+				bundled_range: outbound_lane_data.latest_received_nonce + 1
+					..=relayers_state.last_delivered_nonce,
 				best_stored_nonce: outbound_lane_data.latest_received_nonce,
-			}))
+			}));
 		}
 
 		None
@@ -249,11 +249,11 @@ impl<
 
 	fn call_info(&self) -> Option<CallInfo> {
 		if let Some(info) = self.receive_messages_proof_info() {
-			return Some(CallInfo::ReceiveMessagesProof(info))
+			return Some(CallInfo::ReceiveMessagesProof(info));
 		}
 
 		if let Some(info) = self.receive_messages_delivery_proof_info() {
-			return Some(CallInfo::ReceiveMessagesDeliveryProof(info))
+			return Some(CallInfo::ReceiveMessagesDeliveryProof(info));
 		}
 
 		None
@@ -278,7 +278,7 @@ impl<
 					proof_info
 				);
 
-				return sp_runtime::transaction_validity::InvalidTransaction::Stale.into()
+				return sp_runtime::transaction_validity::InvalidTransaction::Stale.into();
 			},
 			Some(CallInfo::ReceiveMessagesDeliveryProof(proof_info))
 				if proof_info.is_obsolete() =>
@@ -289,7 +289,7 @@ impl<
 					proof_info,
 				);
 
-				return sp_runtime::transaction_validity::InvalidTransaction::Stale.into()
+				return sp_runtime::transaction_validity::InvalidTransaction::Stale.into();
 			},
 			_ => {},
 		}

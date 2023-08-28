@@ -54,8 +54,8 @@ fn send_regular_message() {
 	let message_nonce = active_outbound_lane::<TestRuntime, ()>(test_lane_id())
 		.unwrap()
 		.data()
-		.latest_generated_nonce +
-		1;
+		.latest_generated_nonce
+		+ 1;
 	send_message::<TestRuntime, ()>(test_lane_id(), REGULAR_PAYLOAD)
 		.expect("send_message has failed");
 

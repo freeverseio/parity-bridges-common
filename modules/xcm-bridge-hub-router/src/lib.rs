@@ -100,7 +100,7 @@ pub mod pallet {
 		fn on_initialize(_n: BlockNumberFor<T>) -> Weight {
 			// if XCM queue is still congested, we don't change anything
 			if T::WithBridgeHubChannel::is_congested() {
-				return T::WeightInfo::on_initialize_when_congested()
+				return T::WeightInfo::on_initialize_when_congested();
 			}
 
 			DeliveryFeeFactor::<T, I>::mutate(|f| {
@@ -171,7 +171,7 @@ pub mod pallet {
 		pub(crate) fn on_message_sent_to_bridge(message_size: u32) {
 			// if outbound queue is not congested, do nothing
 			if !T::WithBridgeHubChannel::is_congested() {
-				return
+				return;
 			}
 
 			// ok - we need to increase the fee factor, let's do that
@@ -211,7 +211,7 @@ impl<T: Config<I>, I: 'static> ExporterFor for Pallet<T, I> {
 	) -> Option<(MultiLocation, Option<MultiAsset>)> {
 		// ensure that the message is sent to the expected bridged network
 		if *network != T::BridgedNetworkId::get() {
-			return None
+			return None;
 		}
 
 		// compute fee amount. Keep in mind that this is only the bridge fee. The fee for sending
@@ -255,7 +255,7 @@ impl<T: Config<I>, I: 'static> SendXcm for Pallet<T, I> {
 		// bridge doesn't support oversized/overweight messages now. So it is better to drop such
 		// messages here than at the bridge hub. Let's check the message size.
 		if message_size > HARD_MESSAGE_SIZE_LIMIT {
-			return Err(SendError::ExceedsMaxMessageSize)
+			return Err(SendError::ExceedsMaxMessageSize);
 		}
 
 		// just use exporter to validate destination and insert instructions to pay message fee
@@ -372,10 +372,10 @@ mod tests {
 			let factor = FixedU128::from_rational(125, 100);
 			DeliveryFeeFactor::<TestRuntime, ()>::put(factor);
 			let expected_fee =
-				(FixedU128::saturating_from_integer(BASE_FEE + BYTE_FEE * (msg_size as u128)) *
-					factor)
-					.into_inner() / FixedU128::DIV +
-					HRMP_FEE;
+				(FixedU128::saturating_from_integer(BASE_FEE + BYTE_FEE * (msg_size as u128))
+					* factor)
+					.into_inner() / FixedU128::DIV
+					+ HRMP_FEE;
 			assert_eq!(
 				XcmBridgeHubRouter::validate(&mut Some(dest), &mut Some(xcm)).unwrap().1.get(0),
 				Some(&(BridgeFeeAsset::get(), expected_fee).into()),

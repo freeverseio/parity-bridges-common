@@ -125,7 +125,7 @@ impl RegisterParachain {
 			if reserve_result == TrackedTransactionStatus::Lost {
 				return Err(anyhow::format_err!(
 					"Failed to finalize `reserve-parachain-id` transaction"
-				))
+				));
 			}
 			log::info!(target: "bridge", "Reserved parachain id: {:?}", para_id);
 
@@ -161,7 +161,7 @@ impl RegisterParachain {
 			if register_result == TrackedTransactionStatus::Lost {
 				return Err(anyhow::format_err!(
 					"Failed to finalize `register-parathread` transaction"
-				))
+				));
 			}
 			log::info!(target: "bridge", "Registered parachain: {:?}. Waiting for onboarding", para_id);
 
@@ -248,10 +248,10 @@ async fn wait_para_state<Relaychain: Chain>(
 			})?;
 		if para_state == to_state {
 			log::info!(target: "bridge", "Parachain state is now: {:?}", to_state);
-			return Ok(())
+			return Ok(());
 		}
 		if !from_states.contains(&para_state) {
-			return Err(anyhow::format_err!("Invalid parachain lifecycle: {:?}", para_state))
+			return Err(anyhow::format_err!("Invalid parachain lifecycle: {:?}", para_state));
 		}
 
 		log::info!(target: "bridge", "Parachain state: {:?}. Waiting for {:?}", para_state, to_state);

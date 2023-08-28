@@ -100,7 +100,7 @@ impl<C: Chain, B: Client<C>> CachingClient<C, B> {
 		{
 			let cache = cache.read().await;
 			if let Some(value) = cache.get(key) {
-				return Ok(value.clone())
+				return Ok(value.clone());
 			}
 		}
 

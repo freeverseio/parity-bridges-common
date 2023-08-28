@@ -163,10 +163,12 @@ impl UnverifiedStorageProof {
 		// First we verify the proof for the `UnverifiedStorageProof`.
 		// Note that `verify_trie_proof()` also checks for duplicate keys and unused nodes.
 		match state_version {
-			StateVersion::V0 =>
-				verify_trie_proof::<LayoutV0<H>, _, _, _>(state_root, &self.proof, &self.db),
-			StateVersion::V1 =>
-				verify_trie_proof::<LayoutV1<H>, _, _, _>(state_root, &self.proof, &self.db),
+			StateVersion::V0 => {
+				verify_trie_proof::<LayoutV0<H>, _, _, _>(state_root, &self.proof, &self.db)
+			},
+			StateVersion::V1 => {
+				verify_trie_proof::<LayoutV1<H>, _, _, _>(state_root, &self.proof, &self.db)
+			},
 		}
 		.map_err(|_| StorageProofError::InvalidProof)?;
 
@@ -177,7 +179,7 @@ impl UnverifiedStorageProof {
 			// Let's also make sure that the db is actually sorted.
 			if let Some((next_key, _)) = iter.peek() {
 				if next_key <= &key {
-					return Err(StorageProofError::UnsortedEntries)
+					return Err(StorageProofError::UnsortedEntries);
 				}
 			}
 			trusted_db.push((TrackedStorageKey::new(key), val))
@@ -246,7 +248,7 @@ impl VerifiedStorageProof {
 	pub fn ensure_no_unused_keys(&self) -> Result<(), StorageProofError> {
 		for (key, _) in &self.db {
 			if !key.has_been_read() {
-				return Err(StorageProofError::UnusedKey)
+				return Err(StorageProofError::UnusedKey);
 			}
 		}
 
@@ -306,7 +308,7 @@ pub fn grow_storage_proof<L: TrieConfiguration>(
 		// create branches at the 1st nibble
 		for branch in 1..=15 {
 			if added_nodes >= num_extra_nodes {
-				return
+				return;
 			}
 
 			// create branches at the 1st nibble
@@ -320,7 +322,7 @@ pub fn grow_storage_proof<L: TrieConfiguration>(
 		// create branches at the 2nd nibble
 		for branch in 1..=15 {
 			if added_nodes >= num_extra_nodes {
-				return
+				return;
 			}
 
 			prefix[i] = (first_nibble << 4) | (second_nibble.wrapping_add(branch) % 16);

@@ -79,7 +79,7 @@ impl<T: Config<I>, I: 'static> SubmitFinalityProofHelper<T, I> {
 				best_finalized,
 			);
 
-			return Err(Error::<T, I>::OldHeader)
+			return Err(Error::<T, I>::OldHeader);
 		}
 
 		Ok(())
@@ -108,7 +108,7 @@ pub trait CallSubType<T: Config<I, RuntimeCall = Self>, I: 'static>:
 			return Some(submit_finality_proof_info_from_args::<T, I>(
 				finality_target,
 				justification,
-			))
+			));
 		}
 
 		None

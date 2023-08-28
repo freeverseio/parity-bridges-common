@@ -529,20 +529,24 @@ impl RelayHeadersAndMessages {
 	/// Run the command.
 	pub async fn run(self) -> anyhow::Result<()> {
 		match self {
-			RelayHeadersAndMessages::MillauRialto(params) =>
-				MillauRialtoFull2WayBridge::new(params.into_bridge().await?)?.run().await,
-			RelayHeadersAndMessages::MillauRialtoParachain(params) =>
+			RelayHeadersAndMessages::MillauRialto(params) => {
+				MillauRialtoFull2WayBridge::new(params.into_bridge().await?)?.run().await
+			},
+			RelayHeadersAndMessages::MillauRialtoParachain(params) => {
 				MillauRialtoParachainFull2WayBridge::new(params.into_bridge().await?)?
 					.run()
-					.await,
-			RelayHeadersAndMessages::BridgeHubRococoBridgeHubWococo(params) =>
+					.await
+			},
+			RelayHeadersAndMessages::BridgeHubRococoBridgeHubWococo(params) => {
 				BridgeHubRococoBridgeHubWococoFull2WayBridge::new(params.into_bridge().await?)?
 					.run()
-					.await,
-			RelayHeadersAndMessages::BridgeHubKusamaBridgeHubPolkadot(params) =>
+					.await
+			},
+			RelayHeadersAndMessages::BridgeHubKusamaBridgeHubPolkadot(params) => {
 				BridgeHubKusamaBridgeHubPolkadotFull2WayBridge::new(params.into_bridge().await?)?
 					.run()
-					.await,
+					.await
+			},
 		}
 	}
 }

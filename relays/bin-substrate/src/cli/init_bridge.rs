@@ -239,16 +239,21 @@ impl InitBridge {
 			InitBridgeName::MillauToRialto => MillauToRialtoCliBridge::init_bridge(self),
 			InitBridgeName::RialtoToMillau => RialtoToMillauCliBridge::init_bridge(self),
 			InitBridgeName::WestendToMillau => WestendToMillauCliBridge::init_bridge(self),
-			InitBridgeName::MillauToRialtoParachain =>
-				MillauToRialtoParachainCliBridge::init_bridge(self),
-			InitBridgeName::RococoToBridgeHubWococo =>
-				RococoToBridgeHubWococoCliBridge::init_bridge(self),
-			InitBridgeName::WococoToBridgeHubRococo =>
-				WococoToBridgeHubRococoCliBridge::init_bridge(self),
-			InitBridgeName::KusamaToBridgeHubPolkadot =>
-				KusamaToBridgeHubPolkadotCliBridge::init_bridge(self),
-			InitBridgeName::PolkadotToBridgeHubKusama =>
-				PolkadotToBridgeHubKusamaCliBridge::init_bridge(self),
+			InitBridgeName::MillauToRialtoParachain => {
+				MillauToRialtoParachainCliBridge::init_bridge(self)
+			},
+			InitBridgeName::RococoToBridgeHubWococo => {
+				RococoToBridgeHubWococoCliBridge::init_bridge(self)
+			},
+			InitBridgeName::WococoToBridgeHubRococo => {
+				WococoToBridgeHubRococoCliBridge::init_bridge(self)
+			},
+			InitBridgeName::KusamaToBridgeHubPolkadot => {
+				KusamaToBridgeHubPolkadotCliBridge::init_bridge(self)
+			},
+			InitBridgeName::PolkadotToBridgeHubKusama => {
+				PolkadotToBridgeHubKusamaCliBridge::init_bridge(self)
+			},
 		}
 		.await
 	}

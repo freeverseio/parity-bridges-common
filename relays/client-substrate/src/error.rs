@@ -352,8 +352,9 @@ impl MaybeConnectionError for Error {
 	fn is_connection_error(&self) -> bool {
 		match *self {
 			Error::ChannelError(_) => true,
-			Error::RpcError(ref e) =>
-				matches!(*e, RpcError::Transport(_) | RpcError::RestartNeeded(_),),
+			Error::RpcError(ref e) => {
+				matches!(*e, RpcError::Transport(_) | RpcError::RestartNeeded(_),)
+			},
 			Error::ClientNotSynced(_) => true,
 			_ => self.nested().map(|e| e.is_connection_error()).unwrap_or(false),
 		}

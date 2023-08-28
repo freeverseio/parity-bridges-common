@@ -125,18 +125,24 @@ impl RelayParachains {
 	/// Run the command.
 	pub async fn run(self) -> anyhow::Result<()> {
 		match self.bridge {
-			RelayParachainsBridge::RialtoToMillau =>
-				RialtoParachainToMillauCliBridge::relay_parachains(self),
-			RelayParachainsBridge::WestendToMillau =>
-				AssetHubWestendToMillauCliBridge::relay_parachains(self),
-			RelayParachainsBridge::RococoToBridgeHubWococo =>
-				BridgeHubRococoToBridgeHubWococoCliBridge::relay_parachains(self),
-			RelayParachainsBridge::WococoToBridgeHubRococo =>
-				BridgeHubWococoToBridgeHubRococoCliBridge::relay_parachains(self),
-			RelayParachainsBridge::KusamaToBridgeHubPolkadot =>
-				BridgeHubKusamaToBridgeHubPolkadotCliBridge::relay_parachains(self),
-			RelayParachainsBridge::PolkadotToBridgeHubKusama =>
-				BridgeHubPolkadotToBridgeHubKusamaCliBridge::relay_parachains(self),
+			RelayParachainsBridge::RialtoToMillau => {
+				RialtoParachainToMillauCliBridge::relay_parachains(self)
+			},
+			RelayParachainsBridge::WestendToMillau => {
+				AssetHubWestendToMillauCliBridge::relay_parachains(self)
+			},
+			RelayParachainsBridge::RococoToBridgeHubWococo => {
+				BridgeHubRococoToBridgeHubWococoCliBridge::relay_parachains(self)
+			},
+			RelayParachainsBridge::WococoToBridgeHubRococo => {
+				BridgeHubWococoToBridgeHubRococoCliBridge::relay_parachains(self)
+			},
+			RelayParachainsBridge::KusamaToBridgeHubPolkadot => {
+				BridgeHubKusamaToBridgeHubPolkadotCliBridge::relay_parachains(self)
+			},
+			RelayParachainsBridge::PolkadotToBridgeHubKusama => {
+				BridgeHubPolkadotToBridgeHubKusamaCliBridge::relay_parachains(self)
+			},
 		}
 		.await
 	}

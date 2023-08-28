@@ -486,7 +486,7 @@ pub mod pallet {
 				next_authorities,
 			);
 
-			return Ok(Some(next_authorities.into()))
+			return Ok(Some(next_authorities.into()));
 		};
 
 		Ok(None)
@@ -619,7 +619,7 @@ where
 				if let Event::<T, I>::UpdatedBestFinalizedHeader { grandpa_info, .. } =
 					event.event.try_into().ok()?
 				{
-					return Some(grandpa_info)
+					return Some(grandpa_info);
 				}
 				None
 			})

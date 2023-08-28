@@ -145,10 +145,12 @@ impl PrioritySelectionStrategy {
 		context: &Context<C>,
 	) -> Result<Option<TransactionPriority>, SubstrateError> {
 		match *self {
-			PrioritySelectionStrategy::MakeItBestTransaction =>
-				read_previous_block_best_priority(client, context).await,
-			PrioritySelectionStrategy::MakeItBetterThanQueuedTransaction =>
-				select_priority_from_queue(client, context).await,
+			PrioritySelectionStrategy::MakeItBestTransaction => {
+				read_previous_block_best_priority(client, context).await
+			},
+			PrioritySelectionStrategy::MakeItBetterThanQueuedTransaction => {
+				select_priority_from_queue(client, context).await
+			},
 		}
 	}
 }
@@ -219,7 +221,7 @@ async fn run_until_connection_lost<C: ChainWithTransactions>(
 					C::NAME,
 					error,
 				);
-				return Err(FailedClient::Target)
+				return Err(FailedClient::Target);
 			},
 		};
 	}
@@ -240,7 +242,7 @@ async fn run_loop_iteration<C: ChainWithTransactions>(
 			Some(original_transaction) => original_transaction,
 			None => {
 				log::trace!(target: "bridge", "No {} transactions from required signer in the txpool", C::NAME);
-				return Ok(context)
+				return Ok(context);
 			},
 		};
 	let original_transaction_hash = C::Hasher::hash(&original_transaction.encode());
@@ -256,7 +258,7 @@ async fn run_loop_iteration<C: ChainWithTransactions>(
 			context.stalled_for,
 			context.stalled_for_limit,
 		);
-		return Ok(context)
+		return Ok(context);
 	}
 
 	// select priority for updated transaction
@@ -264,7 +266,7 @@ async fn run_loop_iteration<C: ChainWithTransactions>(
 		Some(target_priority) => target_priority,
 		None => {
 			log::trace!(target: "bridge", "Failed to select target priority");
-			return Ok(context)
+			return Ok(context);
 		},
 	};
 
@@ -282,7 +284,7 @@ async fn run_loop_iteration<C: ChainWithTransactions>(
 
 	if !is_updated {
 		log::trace!(target: "bridge", "{} transaction tip can not be updated. Reached limit?", C::NAME);
-		return Ok(context)
+		return Ok(context);
 	}
 
 	let updated_transaction = updated_transaction.encode();
@@ -310,10 +312,10 @@ async fn lookup_signer_transaction<C: ChainWithTransactions>(
 		let pending_transaction = C::SignedTransaction::decode(&mut &pending_transaction.0[..])
 			.map_err(SubstrateError::ResponseParseFailed)?;
 		if !C::is_signed_by(key_pair, &pending_transaction) {
-			continue
+			continue;
 		}
 
-		return Ok(Some(pending_transaction))
+		return Ok(Some(pending_transaction));
 	}
 
 	Ok(None)
@@ -368,7 +370,7 @@ fn select_transaction_from_queue<C: Chain>(
 	context: &Context<C>,
 ) -> Option<Bytes> {
 	if queued_transactions.is_empty() {
-		return None
+		return None;
 	}
 
 	// the more times we resubmit transaction (`context.resubmitted`), the closer we move
@@ -406,7 +408,7 @@ async fn update_transaction_tip<C: ChainWithTransactions>(
 	while current_priority < target_priority {
 		let next_tip = unsigned_tx.tip + tip_step;
 		if next_tip > tip_limit {
-			break
+			break;
 		}
 
 		log::trace!(

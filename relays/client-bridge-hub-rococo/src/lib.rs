@@ -65,8 +65,9 @@ impl ChainWithBalances for BridgeHubRococo {
 impl From<MockUtilityCall<RuntimeCall>> for RuntimeCall {
 	fn from(value: MockUtilityCall<RuntimeCall>) -> RuntimeCall {
 		match value {
-			MockUtilityCall::batch_all(calls) =>
-				RuntimeCall::Utility(UtilityCall::batch_all { calls }),
+			MockUtilityCall::batch_all(calls) => {
+				RuntimeCall::Utility(UtilityCall::batch_all { calls })
+			},
 		}
 	}
 }

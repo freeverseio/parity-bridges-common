@@ -125,16 +125,21 @@ impl RelayHeaders {
 			RelayHeadersBridge::MillauToRialto => MillauToRialtoCliBridge::relay_headers(self),
 			RelayHeadersBridge::RialtoToMillau => RialtoToMillauCliBridge::relay_headers(self),
 			RelayHeadersBridge::WestendToMillau => WestendToMillauCliBridge::relay_headers(self),
-			RelayHeadersBridge::MillauToRialtoParachain =>
-				MillauToRialtoParachainCliBridge::relay_headers(self),
-			RelayHeadersBridge::RococoToBridgeHubWococo =>
-				RococoToBridgeHubWococoCliBridge::relay_headers(self),
-			RelayHeadersBridge::WococoToBridgeHubRococo =>
-				WococoToBridgeHubRococoCliBridge::relay_headers(self),
-			RelayHeadersBridge::KusamaToBridgeHubPolkadot =>
-				KusamaToBridgeHubPolkadotCliBridge::relay_headers(self),
-			RelayHeadersBridge::PolkadotToBridgeHubKusama =>
-				PolkadotToBridgeHubKusamaCliBridge::relay_headers(self),
+			RelayHeadersBridge::MillauToRialtoParachain => {
+				MillauToRialtoParachainCliBridge::relay_headers(self)
+			},
+			RelayHeadersBridge::RococoToBridgeHubWococo => {
+				RococoToBridgeHubWococoCliBridge::relay_headers(self)
+			},
+			RelayHeadersBridge::WococoToBridgeHubRococo => {
+				WococoToBridgeHubRococoCliBridge::relay_headers(self)
+			},
+			RelayHeadersBridge::KusamaToBridgeHubPolkadot => {
+				KusamaToBridgeHubPolkadotCliBridge::relay_headers(self)
+			},
+			RelayHeadersBridge::PolkadotToBridgeHubKusama => {
+				PolkadotToBridgeHubKusamaCliBridge::relay_headers(self)
+			},
 		}
 		.await
 	}

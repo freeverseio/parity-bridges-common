@@ -45,7 +45,7 @@ where
 	BalanceOf<C>: Into<u128> + std::fmt::Debug,
 {
 	if relay_accounts.is_empty() {
-		return Ok(())
+		return Ok(());
 	}
 
 	// if `tokenDecimals` is missing from system properties, we'll be using

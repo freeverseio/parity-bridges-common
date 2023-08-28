@@ -54,7 +54,7 @@ impl<T: Config<I>, I: 'static> SubmitParachainHeadsHelper<T, I> {
 				stored_best_head.best_head_hash.at_relay_block_number,
 				update.at_relay_block_number
 			);
-			return true
+			return true;
 		}
 
 		if stored_best_head.best_head_hash.head_hash == update.para_head_hash {
@@ -67,7 +67,7 @@ impl<T: Config<I>, I: 'static> SubmitParachainHeadsHelper<T, I> {
 				stored_best_head.best_head_hash.at_relay_block_number,
 				update.at_relay_block_number
 			);
-			return true
+			return true;
 		}
 
 		false
@@ -76,12 +76,13 @@ impl<T: Config<I>, I: 'static> SubmitParachainHeadsHelper<T, I> {
 	/// Check if the `SubmitParachainHeads` was successfully executed.
 	pub fn was_successful(update: &SubmitParachainHeadsInfo) -> bool {
 		match crate::ParasInfo::<T, I>::get(update.para_id) {
-			Some(stored_best_head) =>
-				stored_best_head.best_head_hash ==
-					BestParaHeadHash {
+			Some(stored_best_head) => {
+				stored_best_head.best_head_hash
+					== BestParaHeadHash {
 						at_relay_block_number: update.at_relay_block_number,
 						head_hash: update.para_head_hash,
-					},
+					}
+			},
 			None => false,
 		}
 	}
@@ -105,7 +106,7 @@ pub trait CallSubType<T: Config<I, RuntimeCall = Self>, I: 'static>:
 					at_relay_block_number: at_relay_block.0,
 					para_id,
 					para_head_hash,
-				})
+				});
 			}
 		}
 
@@ -139,7 +140,7 @@ pub trait CallSubType<T: Config<I, RuntimeCall = Self>, I: 'static>:
 		};
 
 		if SubmitParachainHeadsHelper::<T, I>::is_obsolete(&update) {
-			return InvalidTransaction::Stale.into()
+			return InvalidTransaction::Stale.into();
 		}
 
 		Ok(ValidTransaction::default())
