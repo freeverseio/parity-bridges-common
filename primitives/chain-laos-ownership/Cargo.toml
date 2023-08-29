@@ -24,7 +24,7 @@ sp-runtime = { git = "https://github.com/paritytech/substrate", branch = "polkad
 sp-std = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v1.0.0", default-features = false }
 
 # Ownership parachain Primitives
-ownership-parachain-primitives = { git = "https://github.com/freeverseio/laos-ownership-node.git", branch = "feat/relayer", default-features = false }
+ownership-parachain-primitives = { git = "https://github.com/freeverseio/laos-ownership-node.git", branch = "dev", default-features = false }
 
 [features]
 default = ["std"]
