@@ -17,7 +17,7 @@
 //! Ownership parachain specification for CLI.
 
 use crate::cli::CliChain;
-use relay_ownership_parachain_client::OwnershipParachain;
+use relay_laos_ownership_client::OwnershipParachain;
 use relay_substrate_client::SimpleRuntimeVersion;
 
 impl CliChain for OwnershipParachain {

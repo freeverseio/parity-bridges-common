@@ -18,7 +18,7 @@
 
 use crate::cli::CliChain;
 use node_template_runtime as evochain_runtime;
-use relay_evochain_client::Evochain;
+use relay_laos_evolution_client::Evochain;
 use relay_substrate_client::SimpleRuntimeVersion;
 
 impl CliChain for Evochain {

@@ -1214,22 +1214,6 @@ dependencies = [
 [[package]]
 name = "bp-evochain"
 version = "0.1.0"
-dependencies = [
- "bp-header-chain 0.1.0",
- "bp-messages 0.1.0",
- "bp-runtime 0.1.0",
- "evochain-primitives",
- "frame-support 4.0.0-dev (git+https://github.com/paritytech/substrate?branch=polkadot-v1.0.0)",
- "frame-system",
- "sp-api 4.0.0-dev (git+https://github.com/paritytech/substrate?branch=polkadot-v1.0.0)",
- "sp-core 21.0.0 (git+https://github.com/paritytech/substrate?branch=polkadot-v1.0.0)",
- "sp-runtime 24.0.0 (git+https://github.com/paritytech/substrate?branch=polkadot-v1.0.0)",
- "sp-std 8.0.0 (git+https://github.com/paritytech/substrate?branch=polkadot-v1.0.0)",
-]
-
-[[package]]
-name = "bp-evochain"
-version = "0.1.0"
 source = "git+https://github.com/freeverseio/parity-bridges-common.git?branch=polkadot-v1.0.0#0298cf94509177ce18119e9862f299cb18afc47c"
 dependencies = [
  "bp-beefy 0.1.0 (git+https://github.com/freeverseio/parity-bridges-common.git?branch=polkadot-v1.0.0)",
@@ -1303,6 +1287,40 @@ dependencies = [
 ]
 
 [[package]]
+name = "bp-laos-evolution"
+version = "0.1.0"
+dependencies = [
+ "bp-header-chain 0.1.0",
+ "bp-messages 0.1.0",
+ "bp-runtime 0.1.0",
+ "evochain-primitives",
+ "frame-support 4.0.0-dev (git+https://github.com/paritytech/substrate?branch=polkadot-v1.0.0)",
+ "frame-system",
+ "sp-api 4.0.0-dev (git+https://github.com/paritytech/substrate?branch=polkadot-v1.0.0)",
+ "sp-core 21.0.0 (git+https://github.com/paritytech/substrate?branch=polkadot-v1.0.0)",
+ "sp-runtime 24.0.0 (git+https://github.com/paritytech/substrate?branch=polkadot-v1.0.0)",
+ "sp-std 8.0.0 (git+https://github.com/paritytech/substrate?branch=polkadot-v1.0.0)",
+]
+
+[[package]]
+name = "bp-laos-ownership"
+version = "0.1.0"
+dependencies = [
+ "bp-bridge-hub-cumulus",
+ "bp-header-chain 0.1.0",
+ "bp-messages 0.1.0",
+ "bp-polkadot-core 0.1.0",
+ "bp-runtime 0.1.0",
+ "frame-support 4.0.0-dev (git+https://github.com/paritytech/substrate?branch=polkadot-v1.0.0)",
+ "frame-system",
+ "ownership-parachain-primitives",
+ "sp-api 4.0.0-dev (git+https://github.com/paritytech/substrate?branch=polkadot-v1.0.0)",
+ "sp-core 21.0.0 (git+https://github.com/paritytech/substrate?branch=polkadot-v1.0.0)",
+ "sp-runtime 24.0.0 (git+https://github.com/paritytech/substrate?branch=polkadot-v1.0.0)",
+ "sp-std 8.0.0 (git+https://github.com/paritytech/substrate?branch=polkadot-v1.0.0)",
+]
+
+[[package]]
 name = "bp-messages"
 version = "0.1.0"
 dependencies = [
@@ -1358,24 +1376,6 @@ dependencies = [
  "sp-runtime 24.0.0 (git+https://github.com/paritytech/substrate?branch=polkadot-v1.0.0)",
  "sp-std 8.0.0 (git+https://github.com/paritytech/substrate?branch=polkadot-v1.0.0)",
  "sp-trie 22.0.0 (git+https://github.com/paritytech/substrate?branch=polkadot-v1.0.0)",
-]
-
-[[package]]
-name = "bp-ownership-parachain"
-version = "0.1.0"
-dependencies = [
- "bp-bridge-hub-cumulus",
- "bp-header-chain 0.1.0",
- "bp-messages 0.1.0",
- "bp-polkadot-core 0.1.0",
- "bp-runtime 0.1.0",
- "frame-support 4.0.0-dev (git+https://github.com/paritytech/substrate?branch=polkadot-v1.0.0)",
- "frame-system",
- "ownership-parachain-primitives",
- "sp-api 4.0.0-dev (git+https://github.com/paritytech/substrate?branch=polkadot-v1.0.0)",
- "sp-core 21.0.0 (git+https://github.com/paritytech/substrate?branch=polkadot-v1.0.0)",
- "sp-runtime 24.0.0 (git+https://github.com/paritytech/substrate?branch=polkadot-v1.0.0)",
- "sp-std 8.0.0 (git+https://github.com/paritytech/substrate?branch=polkadot-v1.0.0)",
 ]
 
 [[package]]
@@ -6319,8 +6319,8 @@ dependencies = [
  "polkadot-runtime-common",
  "polkadot-runtime-parachains",
  "rbtag",
- "relay-evochain-client",
- "relay-ownership-parachain-client",
+ "relay-laos-evolution-client",
+ "relay-laos-ownership-client",
  "relay-substrate-client",
  "relay-utils",
  "rustc-hex",
@@ -6342,7 +6342,7 @@ name = "laos-runtime"
 version = "0.1.0"
 source = "git+https://github.com/freeverseio/laos-ownership-node.git?branch=feat/relayer#4bb12b3c7f80cbb3b14e1ddd4543ccb91de425e6"
 dependencies = [
- "bp-evochain 0.1.0 (git+https://github.com/freeverseio/parity-bridges-common.git?branch=polkadot-v1.0.0)",
+ "bp-evochain",
  "bp-header-chain 0.1.0 (git+https://github.com/freeverseio/parity-bridges-common.git?branch=polkadot-v1.0.0)",
  "bp-runtime 0.1.0 (git+https://github.com/freeverseio/parity-bridges-common.git?branch=polkadot-v1.0.0)",
  "bridge-runtime-common 0.1.0 (git+https://github.com/freeverseio/parity-bridges-common.git?branch=polkadot-v1.0.0)",
@@ -11918,10 +11918,21 @@ dependencies = [
 ]
 
 [[package]]
-name = "relay-evochain-client"
+name = "relay-kusama-client"
 version = "0.1.0"
 dependencies = [
- "bp-evochain 0.1.0",
+ "bp-kusama",
+ "relay-substrate-client",
+ "relay-utils",
+ "sp-core 21.0.0 (git+https://github.com/paritytech/substrate?branch=polkadot-v1.0.0)",
+ "sp-session",
+]
+
+[[package]]
+name = "relay-laos-evolution-client"
+version = "0.1.0"
+dependencies = [
+ "bp-laos-evolution",
  "frame-support 4.0.0-dev (git+https://github.com/paritytech/substrate?branch=polkadot-v1.0.0)",
  "frame-system",
  "node-template-runtime",
@@ -11934,14 +11945,23 @@ dependencies = [
 ]
 
 [[package]]
-name = "relay-kusama-client"
+name = "relay-laos-ownership-client"
 version = "0.1.0"
 dependencies = [
- "bp-kusama",
+ "bp-bridge-hub-cumulus",
+ "bp-header-chain 0.1.0",
+ "bp-laos-evolution",
+ "bp-laos-ownership",
+ "bp-messages 0.1.0",
+ "bp-polkadot-core 0.1.0",
+ "bridge-runtime-common 0.1.0",
+ "parity-scale-codec",
  "relay-substrate-client",
- "relay-utils",
+ "scale-info",
  "sp-core 21.0.0 (git+https://github.com/paritytech/substrate?branch=polkadot-v1.0.0)",
- "sp-session",
+ "sp-runtime 24.0.0 (git+https://github.com/paritytech/substrate?branch=polkadot-v1.0.0)",
+ "sp-weights 20.0.0 (git+https://github.com/paritytech/substrate?branch=polkadot-v1.0.0)",
+ "subxt 0.30.1",
 ]
 
 [[package]]
@@ -11959,26 +11979,6 @@ dependencies = [
  "sp-core 21.0.0 (git+https://github.com/paritytech/substrate?branch=polkadot-v1.0.0)",
  "sp-runtime 24.0.0 (git+https://github.com/paritytech/substrate?branch=polkadot-v1.0.0)",
  "sp-session",
-]
-
-[[package]]
-name = "relay-ownership-parachain-client"
-version = "0.1.0"
-dependencies = [
- "bp-bridge-hub-cumulus",
- "bp-evochain 0.1.0",
- "bp-header-chain 0.1.0",
- "bp-messages 0.1.0",
- "bp-ownership-parachain",
- "bp-polkadot-core 0.1.0",
- "bridge-runtime-common 0.1.0",
- "parity-scale-codec",
- "relay-substrate-client",
- "scale-info",
- "sp-core 21.0.0 (git+https://github.com/paritytech/substrate?branch=polkadot-v1.0.0)",
- "sp-runtime 24.0.0 (git+https://github.com/paritytech/substrate?branch=polkadot-v1.0.0)",
- "sp-weights 20.0.0 (git+https://github.com/paritytech/substrate?branch=polkadot-v1.0.0)",
- "subxt 0.30.1",
 ]
 
 [[package]]

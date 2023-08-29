@@ -1,5 +1,5 @@
 [package]
-name = "relay-ownership-parachain-client"
+name = "relay-laos-ownership-client"
 version = "0.1.0"
 authors = ["Parity Technologies <admin@parity.io>"]
 edition = "2021"
@@ -15,9 +15,9 @@ subxt = { version = "0.30.1", default-features = false, features = ["native"] }
 bp-bridge-hub-cumulus = { path = "../../primitives/chain-bridge-hub-cumulus" }
 bp-header-chain = { path = "../../primitives/header-chain" }
 bp-messages = { path = "../../primitives/messages" }
-bp-evochain = { path = "../../primitives/chain-evolution" }
+bp-laos-evolution = { path = "../../primitives/chain-laos-evolution" }
+bp-laos-ownership = { path = "../../primitives/chain-laos-ownership" }
 bp-polkadot-core = { path = "../../primitives/polkadot-core" }
-bp-ownership-parachain = { path = "../../primitives/chain-ownership-parachain" }
 
 bridge-runtime-common = { path = "../../bin/runtime-common" }
 relay-substrate-client = { path = "../client-substrate" }

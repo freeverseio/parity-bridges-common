@@ -98,9 +98,9 @@ impl BridgeInitializer for EvochainToOwnershipParachainCliBridge {
 	fn encode_init_bridge(
 		init_data: <Self::Engine as Engine<Self::Source>>::InitializationData,
 	) -> <Self::Target as Chain>::Call {
-		type RuntimeCall = relay_ownership_parachain_client::RuntimeCall;
-		type BridgeGrandpaCall = relay_ownership_parachain_client::BridgeGrandpaCall;
-		type SudoCall = relay_ownership_parachain_client::SudoCall;
+		type RuntimeCall = relay_laos_ownership_client::RuntimeCall;
+		type BridgeGrandpaCall = relay_laos_ownership_client::BridgeGrandpaCall;
+		type SudoCall = relay_laos_ownership_client::SudoCall;
 
 		let initialize_call: RuntimeCall =
 			RuntimeCall::BridgeEvochainGrandpa(BridgeGrandpaCall::initialize { init_data });

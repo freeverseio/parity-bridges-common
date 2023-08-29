@@ -1,6 +1,6 @@
 [package]
-name = "bp-ownership-parachain"
-description = "Primitives of Rialto parachain runtime."
+name = "bp-laos-ownership"
+description = "Bridge primitives of LAOS ownership parachain"
 version = "0.1.0"
 authors = ["Parity Technologies <admin@parity.io>"]
 edition = "2021"

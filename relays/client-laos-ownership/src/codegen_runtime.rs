@@ -18,7 +18,7 @@ pub mod api {
                                 pub struct WeakBoundedVec<_0>(pub ::std::vec::Vec<_0>);
                         }
                 }
-                pub mod bp_evochain {
+                pub mod bp_laos_evolution {
                         use super::runtime_types;
                         pub mod evo_hash {
                                 use super::runtime_types;
@@ -1347,13 +1347,13 @@ pub mod api {
                                                 finality_target: ::std::boxed::Box<
                                                         ::sp_runtime::generic::Header<
                                                                 ::core::primitive::u32,
-                                                                ::bp_evochain::Hasher,
+                                                                ::bp_laos_evolution::Hasher,
                                                         >,
                                                 >,
                                                 justification: ::bp_header_chain::justification::GrandpaJustification<
                                                         ::sp_runtime::generic::Header<
                                                                 ::core::primitive::u32,
-                                                                ::bp_evochain::Hasher,
+                                                                ::bp_laos_evolution::Hasher,
                                                         >,
                                                 >,
                                         },
@@ -1362,7 +1362,7 @@ pub mod api {
                                                 init_data: ::bp_header_chain::InitializationData<
                                                         ::sp_runtime::generic::Header<
                                                                 ::core::primitive::u32,
-                                                                ::bp_evochain::Hasher,
+                                                                ::bp_laos_evolution::Hasher,
                                                         >,
                                                 >,
                                         },
@@ -1397,11 +1397,11 @@ pub mod api {
                                         #[codec(index = 0)]
                                         UpdatedBestFinalizedHeader {
                                                 number: ::core::primitive::u32,
-                                                hash: runtime_types::bp_evochain::evo_hash::EvoHash,
+                                                hash: runtime_types::bp_laos_evolution::evo_hash::EvoHash,
                                                 justification: ::bp_header_chain::justification::GrandpaJustification<
                                                         ::sp_runtime::generic::Header<
                                                                 ::core::primitive::u32,
-                                                                ::bp_evochain::Hasher,
+                                                                ::bp_laos_evolution::Hasher,
                                                         >,
                                                 >,
                                         },

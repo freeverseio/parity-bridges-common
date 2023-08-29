@@ -35,20 +35,20 @@ pub type SudoCall = runtime_types::pallet_sudo::pallet::Call;
 pub type BridgeGrandpaCall = runtime_types::pallet_bridge_grandpa::pallet::Call;
 
 /// The address format for describing accounts.
-pub type Address = bp_ownership_parachain::Address;
+pub type Address = bp_laos_ownership::Address;
 
 /// Ownership parachain definition
 #[derive(Debug, Clone, Copy)]
 pub struct OwnershipParachain;
 
 impl UnderlyingChainProvider for OwnershipParachain {
-	type Chain = bp_ownership_parachain::OwnershipParachain;
+	type Chain = bp_laos_ownership::OwnershipParachain;
 }
 
 impl Chain for OwnershipParachain {
 	const NAME: &'static str = "OwnershipParachain";
 	const BEST_FINALIZED_HEADER_ID_METHOD: &'static str =
-		bp_ownership_parachain::BEST_FINALIZED_OWNERSHIP_PARACHAIN_HEADER_METHOD;
+		bp_laos_ownership::BEST_FINALIZED_OWNERSHIP_PARACHAIN_HEADER_METHOD;
 	const AVERAGE_BLOCK_INTERVAL: Duration = Duration::from_secs(5);
 
 	type SignedBlock = bp_polkadot_core::SignedBlock;
@@ -65,15 +65,15 @@ impl ChainWithMessages for OwnershipParachain {
 	// TODO (https://github.com/paritytech/parity-bridges-common/issues/1692): change the name
 	const WITH_CHAIN_RELAYERS_PALLET_NAME: Option<&'static str> = Some("BridgeRelayers");
 	const TO_CHAIN_MESSAGE_DETAILS_METHOD: &'static str =
-		bp_ownership_parachain::TO_OWNERSHIP_PARACHAIN_MESSAGE_DETAILS_METHOD;
+		bp_laos_ownership::TO_OWNERSHIP_PARACHAIN_MESSAGE_DETAILS_METHOD;
 	const FROM_CHAIN_MESSAGE_DETAILS_METHOD: &'static str =
-		bp_ownership_parachain::FROM_OWNERSHIP_PARACHAIN_MESSAGE_DETAILS_METHOD;
+		bp_laos_ownership::FROM_OWNERSHIP_PARACHAIN_MESSAGE_DETAILS_METHOD;
 }
 
 impl ChainWithTransactions for OwnershipParachain {
 	type AccountKeyPair = sp_core::sr25519::Pair;
 	type SignedTransaction =
-		bp_polkadot_core::UncheckedExtrinsic<Self::Call, bp_ownership_parachain::SignedExtension>;
+		bp_polkadot_core::UncheckedExtrinsic<Self::Call, bp_laos_ownership::SignedExtension>;
 
 	fn sign_transaction(
 		param: SignParam<Self>,
@@ -81,7 +81,7 @@ impl ChainWithTransactions for OwnershipParachain {
 	) -> Result<Self::SignedTransaction, SubstrateError> {
 		let raw_payload = SignedPayload::new(
 			unsigned.call,
-			bp_ownership_parachain::SignedExtension::from_params(
+			bp_laos_ownership::SignedExtension::from_params(
 				param.spec_version,
 				param.transaction_version,
 				unsigned.era,
@@ -124,4 +124,4 @@ impl ChainWithTransactions for OwnershipParachain {
 pub type SigningParams = sp_core::sr25519::Pair;
 
 /// OwnershipParachain header type used in headers sync.
-pub type SyncHeader = relay_substrate_client::SyncHeader<bp_ownership_parachain::Header>;
+pub type SyncHeader = relay_substrate_client::SyncHeader<bp_laos_ownership::Header>;

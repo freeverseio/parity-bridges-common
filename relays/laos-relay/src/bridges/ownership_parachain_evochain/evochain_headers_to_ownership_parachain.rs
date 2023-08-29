@@ -23,8 +23,8 @@ use substrate_relay_helper::{
 substrate_relay_helper::generate_submit_finality_proof_call_builder!(
 	EvochainFinalityToOwnershipParachain,
 	EvochainFinalityToOwnershipParachainCallBuilder,
-	relay_ownership_parachain_client::RuntimeCall::BridgeEvochainGrandpa,
-	relay_ownership_parachain_client::BridgeGrandpaCall::submit_finality_proof
+	relay_laos_ownership_client::RuntimeCall::BridgeEvochainGrandpa,
+	relay_laos_ownership_client::BridgeGrandpaCall::submit_finality_proof
 );
 
 /// Description of Evochain -> Rococo finalized headers bridge.
@@ -32,8 +32,8 @@ substrate_relay_helper::generate_submit_finality_proof_call_builder!(
 pub struct EvochainFinalityToOwnershipParachain;
 
 impl SubstrateFinalityPipeline for EvochainFinalityToOwnershipParachain {
-	type SourceChain = relay_evochain_client::Evochain;
-	type TargetChain = relay_ownership_parachain_client::OwnershipParachain;
+	type SourceChain = relay_laos_evolution_client::Evochain;
+	type TargetChain = relay_laos_ownership_client::OwnershipParachain;
 
 	type FinalityEngine = GrandpaFinalityEngine<Self::SourceChain>;
 }
@@ -46,8 +46,8 @@ impl SubstrateFinalitySyncPipeline for EvochainFinalityToOwnershipParachain {
 pub struct EvochainToOwnershipParachainCliBridge {}
 
 impl CliBridgeBase for EvochainToOwnershipParachainCliBridge {
-	type Source = relay_evochain_client::Evochain;
-	type Target = relay_ownership_parachain_client::OwnershipParachain;
+	type Source = relay_laos_evolution_client::Evochain;
+	type Target = relay_laos_ownership_client::OwnershipParachain;
 }
 
 impl RelayToRelayHeadersCliBridge for EvochainToOwnershipParachainCliBridge {

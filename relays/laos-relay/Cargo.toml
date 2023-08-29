@@ -31,8 +31,8 @@ bp-runtime = { path = "../../primitives/runtime" }
 bridge-runtime-common = { path = "../../bin/runtime-common" }
 pallet-bridge-parachains = { path = "../../modules/parachains" }
 pallet-bridge-messages = { path = "../../modules/messages" }
-relay-evochain-client = { path = "../client-evochain" }
-relay-ownership-parachain-client = { path = "../client-ownership-parachain" }
+relay-laos-evolution-client = { path = "../client-laos-evolution" }
+relay-laos-ownership-client = { path = "../client-laos-ownership" }
 relay-substrate-client = { path = "../client-substrate" }
 relay-utils = { path = "../utils" }
 # we are not using this runtime to craft call or transactions, but we still need it

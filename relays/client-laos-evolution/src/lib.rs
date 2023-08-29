@@ -16,7 +16,7 @@
 
 //! Types used to connect to the Evochain-Substrate chain.
 
-use bp_evochain::{AccountId, EVOCHAIN_SYNCED_HEADERS_GRANDPA_INFO_METHOD};
+use bp_laos_evolution::{AccountId, EVOCHAIN_SYNCED_HEADERS_GRANDPA_INFO_METHOD};
 use codec::{Compact, Decode, Encode};
 use node_template_runtime as evochain_runtime;
 use relay_substrate_client::{
@@ -39,22 +39,22 @@ pub type HeaderId = relay_utils::HeaderId<evochain_runtime::Hash, evochain_runti
 pub struct Evochain;
 
 impl UnderlyingChainProvider for Evochain {
-	type Chain = bp_evochain::Evochain;
+	type Chain = bp_laos_evolution::Evochain;
 }
 
 impl ChainWithMessages for Evochain {
 	// TODO (https://github.com/paritytech/parity-bridges-common/issues/1692): change the name
 	const WITH_CHAIN_RELAYERS_PALLET_NAME: Option<&'static str> = Some("BridgeRelayers");
 	const TO_CHAIN_MESSAGE_DETAILS_METHOD: &'static str =
-		bp_evochain::TO_EVOCHAIN_MESSAGE_DETAILS_METHOD;
+		bp_laos_evolution::TO_EVOCHAIN_MESSAGE_DETAILS_METHOD;
 	const FROM_CHAIN_MESSAGE_DETAILS_METHOD: &'static str =
-		bp_evochain::FROM_EVOCHAIN_MESSAGE_DETAILS_METHOD;
+		bp_laos_evolution::FROM_EVOCHAIN_MESSAGE_DETAILS_METHOD;
 }
 
 impl Chain for Evochain {
 	const NAME: &'static str = "Evochain";
 	const BEST_FINALIZED_HEADER_ID_METHOD: &'static str =
-		bp_evochain::BEST_FINALIZED_EVOCHAIN_HEADER_METHOD;
+		bp_laos_evolution::BEST_FINALIZED_EVOCHAIN_HEADER_METHOD;
 	const AVERAGE_BLOCK_INTERVAL: Duration = Duration::from_secs(5);
 
 	type SignedBlock = SignedBlock<evochain_runtime::Block>;

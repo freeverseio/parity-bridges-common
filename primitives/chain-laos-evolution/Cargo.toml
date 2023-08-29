@@ -1,6 +1,6 @@
 [package]
-name = "bp-evochain"
-description = "Bridge primitives of Evochain runtime."
+name = "bp-laos-evolution"
+description = "Bridge primitives of LAOS evolution chain."
 version = "0.1.0"
 authors = ["Parity Technologies <admin@parity.io>"]
 edition = "2021"

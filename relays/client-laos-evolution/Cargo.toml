@@ -1,5 +1,5 @@
 [package]
-name = "relay-evochain-client"
+name = "relay-laos-evolution-client"
 version = "0.1.0"
 authors = ["Parity Technologies <admin@parity.io>"]
 edition = "2021"
@@ -11,7 +11,7 @@ relay-substrate-client = { path = "../client-substrate" }
 relay-utils = { path = "../utils" }
 
 # Supported Chains
-bp-evochain = { path = "../../primitives/chain-evolution" }
+bp-laos-evolution = { path = "../../primitives/chain-laos-evolution" }
 node-template-runtime = { git = "https://github.com/freeverseio/laos-evolution-node.git", branch = "dev" }
 
 # Substrate Dependencies
