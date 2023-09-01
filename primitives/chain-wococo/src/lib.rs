@@ -1,4 +1,4 @@
-// Copyright 2019-2021 Parity Technologies (UK) Ltd.
+// Copyright (C) Parity Technologies (UK) Ltd.
 // This file is part of Parity Bridges Common.
 
 // Parity Bridges Common is free software: you can redistribute it and/or modify
@@ -65,6 +65,9 @@ impl ChainWithGrandpa for Wococo {
 	const MAX_HEADER_SIZE: u32 = MAX_HEADER_SIZE;
 	const AVERAGE_HEADER_SIZE_IN_JUSTIFICATION: u32 = AVERAGE_HEADER_SIZE_IN_JUSTIFICATION;
 }
+
+// The SignedExtension used by Wococo.
+pub use bp_rococo::CommonSignedExtension as SignedExtension;
 
 /// Name of the With-Wococo GRANDPA pallet instance that is deployed at bridged chains.
 pub const WITH_WOCOCO_GRANDPA_PALLET_NAME: &str = "BridgeWococoGrandpa";

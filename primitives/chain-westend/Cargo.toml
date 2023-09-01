@@ -19,6 +19,7 @@ bp-runtime = { path = "../runtime", default-features = false }
 frame-support = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v1.0.0", default-features = false }
 sp-api = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v1.0.0", default-features = false }
 sp-std = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v1.0.0", default-features = false }
+sp-runtime = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v1.0.0", default-features = false }
 
 [features]
 default = ["std"]
@@ -28,5 +29,6 @@ std = [
 	"bp-runtime/std",
 	"frame-support/std",
 	"sp-api/std",
+	"sp-runtime/std",
 	"sp-std/std",
 ]

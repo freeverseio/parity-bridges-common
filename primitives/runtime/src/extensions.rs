@@ -1,4 +1,4 @@
-// Copyright 2019-2021 Parity Technologies (UK) Ltd.
+// Copyright (C) Parity Technologies (UK) Ltd.
 // This file is part of Parity Bridges Common.
 
 // Parity Bridges Common is free software: you can redistribute it and/or modify
@@ -33,6 +33,11 @@ pub trait SignedExtensionSchema: Encode + Decode + Debug + Eq + Clone + StaticTy
 	/// Parameters which are part of the payload used to produce transaction signature,
 	/// but don't end up in the transaction itself (i.e. inherent part of the runtime).
 	type AdditionalSigned: Encode + Debug + Eq + Clone + StaticTypeInfo;
+}
+
+impl SignedExtensionSchema for () {
+	type Payload = ();
+	type AdditionalSigned = ();
 }
 
 /// An implementation of `SignedExtensionSchema` using generic params.
@@ -72,6 +77,9 @@ pub type CheckWeight = GenericSignedExtensionSchema<(), ()>;
 /// The `SignedExtensionSchema` for `pallet_transaction_payment::ChargeTransactionPayment`.
 pub type ChargeTransactionPayment<Balance> = GenericSignedExtensionSchema<Compact<Balance>, ()>;
 
+/// The `SignedExtensionSchema` for `polkadot-runtime-common::PrevalidateAttests`.
+pub type PrevalidateAttests = GenericSignedExtensionSchema<(), ()>;
+
 /// The `SignedExtensionSchema` for `BridgeRejectObsoleteHeadersAndMessages`.
 pub type BridgeRejectObsoleteHeadersAndMessages = GenericSignedExtensionSchema<(), ()>;
 
@@ -100,7 +108,7 @@ pub struct GenericSignedExtension<S: SignedExtensionSchema> {
 	// It may be set to `None` if extensions are decoded. We are never reconstructing transactions
 	// (and it makes no sense to do that) => decoded version of `SignedExtensions` is only used to
 	// read fields of the `payload`. And when resigning transaction, we're reconstructing
-	// `SignedExtensions` from the scratch.
+	// `SignedExtensions` from scratch.
 	additional_signed: Option<S::AdditionalSigned>,
 }
 

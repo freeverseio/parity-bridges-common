@@ -2,8 +2,8 @@
 name = "pallet-xcm-bridge-hub-router"
 description = "Bridge hub interface for sibling/parent chains with dynamic fees support."
 version = "0.1.0"
-authors = ["Parity Technologies <admin@parity.io>"]
-edition = "2021"
+authors.workspace = true
+edition.workspace = true
 license = "GPL-3.0-or-later WITH Classpath-exception-2.0"
 
 [dependencies]
@@ -34,7 +34,7 @@ sp-io = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v1
 sp-std = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v1.0.0" }
 
 [features]
-default = ["std"]
+default = [ "std" ]
 std = [
 	"bp-xcm-bridge-hub/std",
 	"codec/std",
@@ -45,14 +45,18 @@ std = [
 	"scale-info/std",
 	"sp-runtime/std",
 	"sp-std/std",
-	"xcm/std",
 	"xcm-builder/std",
+	"xcm/std",
 ]
 runtime-benchmarks = [
 	"frame-benchmarking/runtime-benchmarks",
+	"frame-support/runtime-benchmarks",
+	"frame-system/runtime-benchmarks",
+	"sp-runtime/runtime-benchmarks",
 	"xcm-builder/runtime-benchmarks",
 ]
 try-runtime = [
 	"frame-support/try-runtime",
 	"frame-system/try-runtime",
+	"sp-runtime/try-runtime",
 ]
